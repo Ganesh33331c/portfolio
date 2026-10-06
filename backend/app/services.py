@@ -39,6 +39,7 @@ def store_message(settings: Settings, msg: ContactIn, ip: str) -> None:
         "ip": ip,
         "name": msg.name,
         "email": str(msg.email),
+        "subject": msg.subject,
         "message": msg.message,
     }
     log.info("contact_message %s", json.dumps(record, ensure_ascii=False))
@@ -58,8 +59,8 @@ def _send_brevo(settings: Settings, msg: ContactIn) -> None:
             "sender": {"name": "Portfolio", "email": settings.mail_from},
             "to": [{"email": settings.mail_to}],
             "replyTo": {"email": str(msg.email), "name": msg.name},
-            "subject": f"Portfolio contact from {msg.name}",
-            "textContent": f"From: {msg.name} <{msg.email}>\n\n{msg.message}",
+            "subject": f"[Portfolio] {msg.subject} (from {msg.name})",
+            "textContent": f"From: {msg.name} <{msg.email}>\nSubject: {msg.subject}\n\n{msg.message}",
         },
         timeout=15,
     )
@@ -68,11 +69,11 @@ def _send_brevo(settings: Settings, msg: ContactIn) -> None:
 
 def _send_smtp(settings: Settings, msg: ContactIn) -> None:
     mail = EmailMessage()
-    mail["Subject"] = f"Portfolio contact from {msg.name}"
+    mail["Subject"] = f"[Portfolio] {msg.subject} (from {msg.name})"
     mail["From"] = settings.smtp_user or settings.mail_to
     mail["To"] = settings.mail_to
     mail["Reply-To"] = str(msg.email)
-    mail.set_content(f"From: {msg.name} <{msg.email}>\n\n{msg.message}")
+    mail.set_content(f"From: {msg.name} <{msg.email}>\nSubject: {msg.subject}\n\n{msg.message}")
     with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=15) as smtp:
         smtp.starttls()
         if settings.smtp_user:

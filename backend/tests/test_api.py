@@ -7,7 +7,7 @@ from app.config import Settings, get_settings
 from app.main import app
 from app import services
 
-VALID = {"name": "Asha", "email": "asha@example.com", "message": "Hello Ganesh, let's talk about a role."}
+VALID = {"name": "Asha", "email": "asha@example.com", "subject": "Python role", "message": "Hello Ganesh, let's talk about a role."}
 
 
 @pytest.fixture()
@@ -46,3 +46,9 @@ def test_rate_limit(client):
     c, _ = client
     codes = [c.post("/api/contact", json=VALID).status_code for _ in range(6)]
     assert codes[-1] == 429
+
+
+def test_subject_required(client):
+    c, _ = client
+    body = {k: v for k, v in VALID.items() if k != "subject"}
+    assert c.post("/api/contact", json=body).status_code == 422

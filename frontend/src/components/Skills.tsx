@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { SKILLS } from "@/data/projects";
+import Reveal from "./Reveal";
 
 function TiltBadge({ label, index }: { label: string; index: number }) {
   const mx = useMotionValue(0);
@@ -34,21 +35,13 @@ function TiltBadge({ label, index }: { label: string; index: number }) {
 
 export default function Skills() {
   return (
-    <section id="about" className="mx-auto max-w-7xl px-5 py-24">
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-        <div>
-          <h2 className="text-4xl font-bold">About me</h2>
-          <p className="mt-5 max-w-md leading-relaxed text-slate-400">
-            I build Python backends and full-stack apps, and I engineer multi-agent Gen AI systems. I also care
-            about security: penetration testing and DevSecOps shape how I design and ship software.
-          </p>
-        </div>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {SKILLS.map((s, i) => (
-            <li key={s}><TiltBadge label={s} index={i} /></li>
-          ))}
-        </ul>
-      </div>
+    <section id="skills" className="mx-auto max-w-6xl px-5 py-24">
+      <Reveal><h2 className="text-4xl font-bold">Skills <span className="text-gradient">(Tech Stack)</span></h2></Reveal>
+      <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {SKILLS.map((s, i) => (
+          <li key={s}><TiltBadge label={s} index={i} /></li>
+        ))}
+      </ul>
     </section>
   );
 }

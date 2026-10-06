@@ -6,7 +6,7 @@ PROJECTS: list[ProjectOut] = [
         category="academic",
         title="Real Time Collaborative Code Editor",
         description="Engineered a high-performance web-based code editor enabling synchronous, real-time developer collaboration.",
-        stack=["React", "Node.js", "WebSockets", "Monaco Editor"],
+        stack=["React", "Node.js", "WebSockets", "Monaco Editor", "JavaScript"],
     ),
     ProjectOut(
         id="sentiment",
@@ -20,7 +20,7 @@ PROJECTS: list[ProjectOut] = [
         category="personal",
         title="Nexus: Proactive DevSecOps AI Agent",
         description="Built an intelligent, proactive DevSecOps AI agent designed to automate security workflows and analyze vulnerabilities.",
-        stack=["Python", "Streamlit", "GitHub", "AI Agents"],
+        stack=["Python", "FastAPI", "React.js", "PostgreSQL", "Docker"],
         github="https://github.com/Ganesh33331c/Nexus-Proactive_DevSecOps_AI_Agent",
     ),
     ProjectOut(
@@ -36,7 +36,7 @@ PROJECTS: list[ProjectOut] = [
         category="personal",
         title="CareerWeave",
         description="Developed an advanced Generative AI application leveraging agentic workflows to streamline career development.",
-        stack=["Gen AI", "Agentic Workflows", "Python", "GCP"],
+        stack=["Multi-Agent AI", "Python", "Django REST Framework", "GCP"],
         github="https://github.com/Ganesh33331c/CareerWeave",
     ),
 ]

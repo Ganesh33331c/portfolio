@@ -5,6 +5,7 @@ export const API_URL: string = process.env.NEXT_PUBLIC_API_URL ?? "http://localh
 export interface ContactPayload {
   name: string;
   email: string;
+  subject: string;
   message: string;
   website: string; // honeypot, must stay empty
 }
